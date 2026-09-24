@@ -19,62 +19,60 @@ struct HomeView :View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 28) {
-                    
-                    FeaturedBannerView(state: viewModel.popularState) {
-                        viewModel.reload(.popular)
-                    }
-                    CarouselSectionView(
-                        title: MovieCategory.popular.rawValue,
-                        category: .popular,
-                        state: viewModel.popularState,
-                        onRetry: { viewModel.reload(.popular) }
-                    )
-
-                    CarouselSectionView(
-                        title: MovieCategory.topRated.rawValue,
-                        category: .topRated,
-                        state: viewModel.topRatedState,
-                        onRetry: { viewModel.reload(.topRated) }
-                    )
-
-                    CarouselSectionView(
-                        title: MovieCategory.upcoming.rawValue,
-                        category: .upcoming,
-                        state: viewModel.upcomingState,
-                        onRetry: { viewModel.reload(.upcoming) }
-                    )
-
-                    CarouselSectionView(
-                        title: MovieCategory.nowPlaying.rawValue,
-                        category: .nowPlaying,
-                        state: viewModel.nowPlayingState,
-                        onRetry: { viewModel.reload(.nowPlaying) }
-                    )
+        ScrollView {
+            VStack(alignment: .leading, spacing: 28) {
+                
+                FeaturedBannerView(state: viewModel.popularState) {
+                    viewModel.reload(.popular)
                 }
-                .padding(.vertical)
+                CarouselSectionView(
+                    title: MovieCategory.popular.rawValue,
+                    category: .popular,
+                    state: viewModel.popularState,
+                    onRetry: { viewModel.reload(.popular) }
+                )
+
+                CarouselSectionView(
+                    title: MovieCategory.topRated.rawValue,
+                    category: .topRated,
+                    state: viewModel.topRatedState,
+                    onRetry: { viewModel.reload(.topRated) }
+                )
+
+                CarouselSectionView(
+                    title: MovieCategory.upcoming.rawValue,
+                    category: .upcoming,
+                    state: viewModel.upcomingState,
+                    onRetry: { viewModel.reload(.upcoming) }
+                )
+
+                CarouselSectionView(
+                    title: MovieCategory.nowPlaying.rawValue,
+                    category: .nowPlaying,
+                    state: viewModel.nowPlayingState,
+                    onRetry: { viewModel.reload(.nowPlaying) }
+                )
             }
-            .background(AppTheme.background)
-            .navigationTitle("Home")
-            .task {
-                if case .idle = viewModel.popularState {
-                    viewModel.loadAll()
-                }
+            .padding(.vertical)
+        }
+        .background(AppTheme.background)
+        .navigationTitle("Home")
+        .task {
+            if case .idle = viewModel.popularState {
+                viewModel.loadAll()
             }
-            .refreshable {
-                await viewModel.refresh()
-            }
-            .onDisappear {
-                viewModel.cancelLoading()
-            }
-            .navigationDestination(for: Movie.self) { movie in
-                MovieDetailView(movie: movie)
-            }
-            .navigationDestination(for: MovieCategory.self) { category in
-                SeeAllView(category: category)
-            }
+        }
+        .refreshable {
+            await viewModel.refresh()
+        }
+        .onDisappear {
+            viewModel.cancelLoading()
+        }
+        .navigationDestination(for: Movie.self) { movie in
+            MovieDetailView(movie: movie)
+        }
+        .navigationDestination(for: MovieCategory.self) { category in
+            SeeAllView(category: category)
         }
     }
 
