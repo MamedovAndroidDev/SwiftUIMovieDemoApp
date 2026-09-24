@@ -80,3 +80,4 @@ playground.xcworkspace
 # API Configurations
 MovieCatalog/Data/Network/Constants/APIConfig.json
 MovieCatalog/Data/Network/Constants/APIConfig.swift
+MovieCatalog/Resources/Config.xcconfig
