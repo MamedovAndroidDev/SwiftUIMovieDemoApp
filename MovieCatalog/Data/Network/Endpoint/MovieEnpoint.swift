@@ -9,14 +9,14 @@ import Foundation
 
 
 
-protocol MovieEnpointProtocol {
+protocol MovieEndpointProtocol {
     var path:String {get}
     var method:HTTPMethod {get}
     var queryItems:[URLQueryItem]? {get}
     var body : Data? {get}
 }
 
-enum MovieEnpoint : MovieEnpointProtocol {
+enum MovieEndpoint : MovieEndpointProtocol {
     
     case movies(category: MovieCategory, page: Int)
     case search(query: String, page: Int)

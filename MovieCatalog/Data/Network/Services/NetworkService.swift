@@ -10,7 +10,7 @@ import Foundation
 // Bezi diller evveli I yazilir bezirlerinde bele yazilir. Normalda class ve interface ikonlari ferqlidir
 
 protocol NetworkServiceProtocol {
-    func makeRequest<T:Decodable> (_ endpoint:MovieEnpoint) async throws -> T
+    func makeRequest<T:Decodable> (_ endpoint:MovieEndpoint) async throws -> T
 }
 
 
@@ -22,7 +22,10 @@ final class DefaultNetworkService: NetworkServiceProtocol {
         self.session = session
         self.decoder = decoder
     }
-    func makeRequest<T>(_ endpoint: MovieEnpoint) async throws -> T where T : Decodable {
+    
+    
+    
+    func makeRequest<T>(_ endpoint: MovieEndpoint) async throws -> T where T : Decodable {
         var components = URLComponents(string: APIConfig.baseURl + endpoint.path)
         components?.queryItems = endpoint.queryItems
     

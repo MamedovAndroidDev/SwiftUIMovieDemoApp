@@ -12,7 +12,7 @@ final class GenreRepository : GenreRepositoryProtocol {
         self.networkService = networkService
     }
     func fetchGenres() async throws -> [Genre] {
-        let dto: GenreResponseDTO =  try await networkService.makeRequest(MovieEnpoint.genreList)
+        let dto: GenreResponseDTO =  try await networkService.makeRequest(MovieEndpoint.genreList)
         return dto.genres.map {$0.toDomain()}
         
     }

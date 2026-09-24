@@ -16,7 +16,7 @@ final class CredentialRepository : CredentialRepositoryProtocol {
     }
     
     func fetchCredits(id: Int) async throws -> Credits {
-        let dto: CreditsDTO =  try await networkService.makeRequest(MovieEnpoint.fetchCredits(id: id))
+        let dto: CreditsDTO =  try await networkService.makeRequest(MovieEndpoint.fetchCredits(id: id))
         return dto.toDomain()
     }
    
