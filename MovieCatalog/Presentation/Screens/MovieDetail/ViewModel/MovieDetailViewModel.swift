@@ -28,7 +28,7 @@ final class MovieDetailViewModel {
     private let fetchSimilarMoviesUseCase:
         FetchSimilarMoviesUseCaseProtocol
 
-    private let fetchCredentialUseCase:
+    private let fetchCreditsUseCase:
         FetchCreditsUseCaseProtocol
 
 
@@ -37,15 +37,14 @@ final class MovieDetailViewModel {
         useCase: ManageWatchlistUseCaseProtocol,
         fetchGenreUseCase: FetchGenresUseCaseProtocol,
         fetchSimilarMoviesUseCase: FetchSimilarMoviesUseCaseProtocol,
-        fetchCredentialUseCase: FetchCreditsUseCaseProtocol
+        fetchCreditsUseCase: FetchCreditsUseCaseProtocol
     ) {
         self.movie = movie
         self.useCase = useCase
         self.fetchGenreUseCase = fetchGenreUseCase
         self.fetchSimilarMoviesUseCase =
             fetchSimilarMoviesUseCase
-        self.fetchCredentialUseCase =
-            fetchCredentialUseCase
+        self.fetchCreditsUseCase = fetchCreditsUseCase
     }
     
     func checkIfSavedMovie() async {
@@ -134,7 +133,7 @@ final class MovieDetailViewModel {
         }
         creditsState = .loading
         do {
-            let credits = try await fetchCredentialUseCase.execute(movieId: movie.id)
+            let credits = try await fetchCreditsUseCase.execute(movieId: movie.id)
             let director = credits.director
             creditsState = .loaded(director: director, cast: credits.cast)
         }catch {

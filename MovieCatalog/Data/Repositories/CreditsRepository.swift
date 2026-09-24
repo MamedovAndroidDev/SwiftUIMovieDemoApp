@@ -6,7 +6,7 @@
 //
 
 
-final class CredentialRepository : CredentialRepositoryProtocol {
+final class CreditsRepository : CreditsRepositoryProtocol {
     
     
     private let networkService : NetworkServiceProtocol

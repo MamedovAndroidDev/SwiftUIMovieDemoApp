@@ -14,7 +14,7 @@ final class DIContainer {
     
     lazy var movieRepository: MovieRepositoryProtocol = MovieRepository(networkService: networkService)
     lazy var genreRepository: GenreRepositoryProtocol = GenreRepository(networkService: networkService)
-    lazy var creditsRepository: CredentialRepositoryProtocol = CredentialRepository(networkService: networkService)
+    lazy var creditsRepository: CreditsRepositoryProtocol = CreditsRepository(networkService: networkService)
    
     
     lazy var fetchGenreUseCase : FetchGenresUseCaseProtocol = FetchGenresUseCase(repository: genreRepository)

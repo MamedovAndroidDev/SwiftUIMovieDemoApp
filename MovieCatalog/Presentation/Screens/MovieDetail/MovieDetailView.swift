@@ -39,7 +39,7 @@ struct MovieDetailView: View {
                 useCase: useCase,
                 fetchGenreUseCase: fetchGenresUseCase,
                 fetchSimilarMoviesUseCase: fetchSimilarMoviesUseCase,
-                fetchCredentialUseCase: fetchCreditsUseCase)
+                fetchCreditsUseCase: fetchCreditsUseCase)
         )
         
     }
@@ -259,16 +259,9 @@ struct MovieDetailView: View {
             ) {
                 LazyHStack(spacing: 12) {
                     ForEach(movies) { movie in
-                        MoviePosterCard(movie: movie)
-                            .onTapGesture {
-                                Task {
-                                    await viewModel.selectSimilarMovie(movie)
-                                }
-                            }
-                            .frame(width: 120)
-                            .task {
-                                await viewModel.loadNextSimilarPageIfNeeded(currentItem: movie)
-                            }
+                        NavigationLink(value: movie) {
+                            MoviePosterCard(movie: movie)
+                        }
                     }
                     if isLoadingMore {
                         ProgressView()

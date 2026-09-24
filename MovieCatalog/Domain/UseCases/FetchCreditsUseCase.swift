@@ -9,9 +9,9 @@ protocol FetchCreditsUseCaseProtocol {
     func execute(movieId: Int) async throws -> Credits
 }
 final class FetchCreditsUseCase: FetchCreditsUseCaseProtocol {
-    private let repository:CredentialRepositoryProtocol
+    private let repository:CreditsRepositoryProtocol
  
-    init(repository: CredentialRepositoryProtocol) {
+    init(repository: CreditsRepositoryProtocol) {
         self.repository = repository
     }
     func execute(movieId: Int) async throws -> Credits {
